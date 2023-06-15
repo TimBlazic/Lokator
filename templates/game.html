@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lokator</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
+  
+  <style>
+    .header{
+      padding-top: 10px;
+      display: flex;
+      width: 50%;
+      position: absolute;
+      top: 0;
+    }
+    body{
+      font-family: "pretendard", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+    }
+    #map { 
+      height: 1000px; 
+      width: 800px;
+      border: black 3px solid;
+    }
+    .left{
+      display: inline-flex; 
+      align-items: center; 
+      justify-content: center;
+      width: 50%;
+      height: 1000px;
+      margin-left: 30px;
+    }
+    .h1{
+      margin: 0 auto; 
+      font-weight: bold;
+      font-size: 40px;
+    }
+    .logout_button, button{
+      rightloat: right;
+      background-color: #0197f6;
+      border-radius: 5px;
+      border: solid 1px #0197f6;
+      color: white;
+      font-weight: bold;
+    }
+    .logout_button a{
+      text-decoration: none;
+      color: white;
+      padding: 8px 16px;
+      font-weight: bold;
+    }
+    button{
+      margin: left; 20px;
+      padding: 8px 16px;
+      font-size: 15px;
+      font-weight: bold;
+    }
+    .input_range{
+      width: 780px;
+    }
+    .right{
+      position: absolute;
+      margin: 5px;
+      top: 0;
+      right: 0;
+    }
+    #image{
+      width: 880px;
+      height: 500px;
+      box-shadow: 0px 0px 30px black;
+    }
+    .submit{
+      display: flex;
+      margin-top: 50px;
+    }
+
+    .range_value {
+      display: inline-block;
+      position: absolute;
+      left: 445px;
+      top: 740px;
+      font-size: 25px;
+      font-weight: bold;
+      transform: translateX(-50%);
+    }
+    a{
+      text-decoration: none;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="left">
+    <div class="header">
+      <a href="/main" class="h1">Lokator</a>
+      <button class="logout_button"><a href="/">LOGOUT</a></button>
+    </div>
+    
+    <div class="neki">
+      <div id="image">
+        <img src="{{ url_for('static', filename='slike') }}/{{uporabljene_slike[-1]}}" id="image">
+      </div>
+
+      <div class="submit">
+        <input class="input_range" type="range" title="year" min="1899" max="2023"  onchange="updateValue(this.value)" name="year" id="year" value="year">
+
+        <div class="range_value" id="range_value">1961</div>
+        
+        <button type="button" onclick="poslji()">Submit</button>
+        
+        
+      </div>
+      
+
+    </div>
+  </div>
+  <div class="right">
+    <div id="map"></div>
+  </div>
+   
+</body>
+</html>
+<script>
+    // nastavitve in omejitve za mapo
+    var southWest = L.latLng(45.3, 13.3),
+        northEast = L.latLng(46.9, 16.7),
+        bounds = L.latLngBounds(southWest, northEast);
+
+    var map = L.map('map').setView([46.056946, 14.505751], 12).setMinZoom(8.35);
+
+    map.setMaxBounds(bounds);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    // nastavi spremenljivke
+    var marker = null;
+    var lat, lng; 
+
+    map.on('click', function(e) {
+      if (marker) {
+        map.removeLayer(marker);
+      }
+      marker = L.marker(e.latlng).addTo(map);
+      if (marker) {
+        const coords = marker.getLatLng();
+        console.log(coords.lat);
+        console.log(coords.lng);
+        lat = coords.lat;
+        lng = coords.lng;
+        /*map.removeLayer(marker);*/
+      }
+      
+    });
+
+    function poslji() {
+      var year = document.getElementById("year").value;
+      console.log(year);
+
+      $.ajax({
+        // poslje v ajax podatke
+        url: "/coordinates",
+        type: "POST",
+        data: {
+          "lat": lat,
+          "lng": lng,
+          "year": year
+        },
+        success: function(response) {
+          console.log("Coordinates saved successfully!");
+          resetMapAndYear(); // klice funkcijo za resetiranje inputov
+
+        },
+        error: function(xhr) {
+          console.log("Error saving coordinates: " + xhr.statusText);
+        }
+      });
+    }
+
+    function updateValue(value) {
+      document.getElementById("range_value").innerHTML = value;
+    }
+
+    function resetMapAndYear() {
+      // resetira leto 
+      document.getElementById("year").value = ""; 
+      document.getElementById("range_value").innerHTML = "1961";
+      location.reload();
+    
+      if (marker) {
+        // odstrani marker iz mape in ga nastavi na nic
+        map.removeLayer(marker); 
+        marker = null; 
+      }
+    }
+  </script>

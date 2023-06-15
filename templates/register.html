@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="sl">
+  <head>
+    <title>Register</title>
+    
+    <style>
+      body{
+        font-family: "pretendard", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        text-align: center;
+        justify-content: center;
+      }
+      .button, .back{
+        color: white;
+        background-color: #0197f6;
+        border-radius: 5px;
+        border: solid 1px #0197f6;
+        padding: 5px 10px;
+      }
+      .back a{
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+      }
+      h1{
+        margin: 0 auto; 
+        font-weight: bold;
+        font-size: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <form action = "/register" method = "POST">
+      <h1>Vpiši se!</h1><br>
+      <label>Uporabniško ime:</label><br>
+      <input type = 'text' name = 'uporabniskoIme' required autofocus/><br>
+
+      <label>Ime:</label><br>
+      <input type = 'text' name = 'ime' required/><br>
+      <label>Priimek:</label><br>
+      <input type = 'text' name = 'priimek' required/><br>
+
+      <label>Mail:</label><br>
+      <input type = 'email' name = 'email' required/><br>
+
+      <label>Geslo:</label><br>
+      <input type = 'password' name = 'geslo' required/><br>
+      <label>Ponovi geslo:</label><br>
+      <input type = 'password' name = 'potrditevGesla' required/>
+      <br>
+      <br>
+      <input class="button" type = 'submit' value = 'Registriraj se'/>
+      <br>
+    </form>
+    <br>
+
+   <form action="/">
+         <button class="back" type="submit">Back</button>
+   </form>
+  
+  </body>
+</html>

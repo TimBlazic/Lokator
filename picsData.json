@@ -1,0 +1,74 @@
+{
+  "_default": {
+    "1": {
+      "ID": 1, 
+      "imeSlike": "slika1.png", 
+      "latSlika": 46.05139, 
+      "lngSlika": 14.50115, 
+      "year": 2023
+    },
+    "2": {
+      "ID": 2, 
+      "imeSlike": "slika2.png", 
+      "latSlika": 46.050079, 
+      "lngSlika": 14.506846, 
+      "year": 1910
+    },
+    "3": {
+      "ID": 3, 
+      "imeSlike": "slika3.png", 
+      "latSlika": 46.443370, 
+      "lngSlika": 13.771780, 
+      "year": 2016
+    },
+    "4": {
+      "ID": 4, 
+      "imeSlike": "slika4.png", 
+      "latSlika": 46.238108, 
+      "lngSlika": 14.353383, 
+      "year": 2022
+    },
+    "5": {
+      "ID": 5, 
+      "imeSlike": "slika5.png", 
+      "latSlika": 46.057008, 
+      "lngSlika": 14.505218, 
+      "year": 2022
+    },
+    "6": {
+      "ID": 6, 
+      "imeSlike": "slika6.png", 
+      "latSlika": 46.049613, 
+      "lngSlika": 14.504570, 
+      "year": 1918
+    },
+    "7": {
+      "ID": 7, 
+      "imeSlike": "slika7.png", 
+      "latSlika": 46.229701, 
+      "lngSlika": 14.455278, 
+      "year": 1963
+    },
+    "8": {
+      "ID": 8, 
+      "imeSlike": "slika8.png", 
+      "latSlika": 46.365055, 
+      "lngSlika": 14.132034, 
+      "year": 2016
+    },
+    "9": {
+      "ID": 9, 
+      "imeSlike": "slika9.png", 
+      "latSlika": 46.3636867, 
+      "lngSlika": 14.1261384, 
+      "year": 2016
+    },
+    "10": {
+      "ID": 10, 
+      "imeSlike": "slika10.png", 
+      "latSlika": 46.2506227, 
+      "lngSlika": 14.3465737, 
+      "year": 1985
+    }
+  }
+}

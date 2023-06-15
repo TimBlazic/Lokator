@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lokator</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+
+  <style>
+    body {
+      font-family: "pretendard", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      margin: auto 100px;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+    }
+
+    .left-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+    }
+
+    .header h1 {
+      font-weight: bold;
+      font-size: 40px;
+      margin-right: 10px;
+    }
+    h1, h2, h3{
+      color: #0197f6;
+    }
+
+    .logout_button,
+    .play_button {
+      background-color: #0197f6;
+      border-radius: 5px;
+      border: solid 1px #0197f6;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 8px 16px;
+      font-size: 15px;
+      margin-left: 10px;
+    }
+
+    .right-panel {
+      width: 40%;
+      float: left;
+    }
+
+    .instructions {
+      margin-top: 20px;
+    }
+
+    .instructions h1 {
+      font-weight: bold;
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .instructions p {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .scoreboard {
+      margin-top: 20px;
+    }
+
+    
+    .container-leaderboard {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .playerEntry {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .profilePic img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .username {
+      font-weight: bold;
+      font-size: 22px;
+      margin-right: 10px;
+    }
+
+    .score {
+      font-size: 20px;
+    }
+    .left-panel{
+      width: 40%;
+      float: left;
+      
+    .a{
+      font-size: 50px;
+      font-weight: bold;
+    }
+
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="left-panel">
+      <div class="header">
+        <h1>Lokator</h1>
+        <a href="/" class="logout_button">LOGOUT</a>
+        <form action="/umes" method="GET">
+          <button type="submit" class="play_button">Play</button>
+        </form>
+  </div>
+    
+  
+  <div class="information">
+    <br>
+    <br>
+    <h1>Pozdravljeni!</h1>
+    <p>
+      Dobrodošli v igri Lokator! Izzovite svoje znanje geografije in zgodovine ter ugotovite,       kako dobro poznate svet. Poskusite uganiti letnice in lokacije, na katerih so bile             posnete fotografije.
+    </p>
+    <p>
+      Vsak krog ima svoje posebnosti in točkovanje, zato se potrudite doseči čim več 
+      točk v vsaki rundi. Srečno!
+    </p>
+  </div>
+  </div>
+    </div>
+    <div class="left-panel">
+      <div class="instructions">
+        <h1>Navodila</h1>
+        <p>
+          Cilj igre je čim bolje uganiti letnico in lokacijo, kjer je bila posneta fotografija.
+          Igra ima 5 krogov, vsak krog pa ti lahko prinese največ 5.000 točk.
+          Če ugotoviš samo letnico, dobiš 2.000 točk, če pa ugotoviš tako letnico kot tudi lokacijo slike, dobiš 3.000 točk.
+          Za še večji izziv poskusi čim bolj natančno ugotoviti tako lokacijo kot tudi letnico, saj boš le tako dobil/a vse točke.
+        </p>
+      </div>
+    </div>
+      
+    <div class="right-panel">
+      <div class="container-leaderboard">
+        <h2>Leaderboard</h2>
+        <div class="topScoreboard">
+          {% for username, player_data in top_players.items() %}
+            <div class="playerEntry">
+              <div class="a">{{ loop.index }}.</div>
+              <div class="profilePic">
+                <img src="{{ player_data.profileImg }}" alt="Profile Picture">
+              </div>
+              <div class="username">{{ username }}</div>
+              <div class="score">{{ player_data.score }}</div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    </div>
+
+  
+</body>
+</html>

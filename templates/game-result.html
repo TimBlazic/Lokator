@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lokator</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
+  
+  
+  
+  <style>
+    .header{
+      padding-top: 10px;
+      display: flex;
+      width: 50%;
+      position: absolute;
+      top: 0;
+    }
+    body{
+      font-family: "pretendard", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+    }
+    #map { 
+      height: 1000px; 
+      width: 800px;
+      border: black 3px solid;
+    }
+    .center{
+      position: absolute;
+      top: 10px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    h1{
+      margin: 0 auto; 
+      font-weight: bold;
+      font-size: 40px;
+    }
+    .logout_button, button{
+      rightloat: right;
+      background-color: #0197f6;
+      border-radius: 5px;
+      border: solid 1px #0197f6;
+      color: white;
+      font-weight: bold;
+    }
+    .logout_button a{
+      text-decoration: none;
+      color: white;
+      padding: 8px 16px;
+      font-weight: bold;
+    }
+    button{
+      margin: left; 20px;
+      padding: 8px 16px;
+      font-size: 15px;
+      font-weight: bold;
+    }
+    .input_range{
+      width: 780px;
+    }
+    .right{
+      position: absolute;
+      margin: 5px;
+      top: 0;
+      right: 0;
+    }
+    #image{
+      width: 880px;
+      height: 500px;
+      box-shadow: 0px 0px 30px black;
+    }
+    .submit{
+      display: flex;
+      margin-top: 50px;
+    }
+
+    .range_value {
+      display: inline-block;
+      position: absolute;
+      left: 445px;
+      top: 740px;
+      font-size: 25px;
+      font-weight: bold;
+      transform: translateX(-50%);
+    }
+    .foot{
+      
+      position: absolute;
+      bottom: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .score{
+      position: absolute;
+      top: 400px;
+      font-size: 50px;
+      font-weight: bold;
+    }
+    .h1 {
+      font-weight: bold;
+      text-decoration: none;
+      padding: 0;
+      margin-right: 30px;
+      font-size: 50px;
+      color: black;
+      
+    }
+    .header{
+      padding-top: 10px;
+      display: flex;
+      width: 50%;
+      position: absolute;
+      top: 0;
+    }
+    .congratulations{
+      display: flex;
+      justify-content: center;
+      align-items: center; 
+      position: absolute;
+      width: 500px;
+      top: 200px;
+      left: 40%;
+      right: 40%;
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="center">
+    <div class="header">
+      <a href="/main" class="h1">Lokator</a>
+      <button class="logout_button"><a href="/">LOGOUT</a></button>
+    </div>
+    <div class="congratulations">
+      {% if all_score <= 5000 %}
+        <h1>Ne gre ti neki dobr 😂</h1>
+      {% elif all_score > 5000 and all_score <= 15000 %}
+        <h1>Si na malo slabši poti do zmage 😅</h1>
+      {% elif all_score > 15000 and all_score <= 20000 %}
+        <h1>Še mal pa si tm 🤨</h1>
+      {% else %}
+        <h1>Bravo, si med boljšimi. Zdej se loh považš 🤓</h1>
+      {% endif %}
+    </div>
+    <div class="score">
+      {{ all_score }}
+    </div>
+  </div>
+  
+  <div class="foot">
+    <form action="/main" method="GET">
+      <button type="submit">Home</button>
+    </form>
+    <form action="/umes" method="GET">
+      <button type="submit">New game</button>
+    </form>
+  </div>
+   
+</body>
+</html>
+
